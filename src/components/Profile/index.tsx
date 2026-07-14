@@ -136,7 +136,7 @@ export default function Profile({ id }: { id?: string }) {
               <TextWithEmojis
                 text={username}
                 emojis={emojis}
-                className="truncate text-xl font-semibold select-text"
+                className="truncate text-3xl font-minostrelis select-text"
               />
               <TrustScoreBadge pubkey={pubkey} />
               {isFollowingYou && (

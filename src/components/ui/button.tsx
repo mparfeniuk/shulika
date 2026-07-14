@@ -21,14 +21,20 @@ const buttonVariants = cva(
           'text-foreground [&:not([aria-pressed=true])]:hover:bg-muted/40 aria-pressed:bg-accent aria-pressed:ring-1 aria-pressed:ring-inset aria-pressed:ring-foreground/20',
         'ghost-destructive':
           'cursor-pointer hover:bg-destructive/20 text-destructive hover:text-destructive',
-        link: 'text-foreground underline-offset-4 hover:underline'
+        link: 'text-foreground underline-offset-4 hover:underline',
+        
+        /* Твій новий Amber варіант */
+        amber: 'bg-amber-500/15 text-amber-500/60 hover:text-amber-400 active:scale-95 !no-underline font-lora'
       },
       size: {
         default: 'h-9 px-4 py-2',
         sm: 'h-8 rounded-md px-3 text-xs',
         lg: 'h-10 rounded-lg px-8',
         icon: 'h-9 w-9 shrink-0',
-        'titlebar-icon': 'h-10 w-10 shrink-0 rounded-xl [&_svg]:size-5'
+        'titlebar-icon': 'h-10 w-10 shrink-0 rounded-xl [&_svg]:size-5',
+        
+        /* Твій адаптивний розмір (мобільний: іконка 8/9.5 -> десктоп: кнопка з текстом) */
+        amber: 'size-8 sm:size-9.5 hidden md:flex md:w-auto md:rounded-lg md:px-4'
       }
     },
     defaultVariants: {
