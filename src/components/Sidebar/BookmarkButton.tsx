@@ -1,6 +1,5 @@
 import { usePrimaryPage } from '@/PageManager'
 import { useNostr } from '@/providers/NostrProvider'
-import { BookmarkSimpleIcon } from '@phosphor-icons/react'
 import SidebarItem from './SidebarItem'
 
 export default function BookmarkButton({ collapse }: { collapse: boolean }) {

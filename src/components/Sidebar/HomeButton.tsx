@@ -1,5 +1,4 @@
 import { usePrimaryPage } from '@/PageManager'
-import { HouseIcon } from '@phosphor-icons/react'
 import SidebarItem from './SidebarItem'
 
 export default function HomeButton({ collapse }: { collapse: boolean }) {

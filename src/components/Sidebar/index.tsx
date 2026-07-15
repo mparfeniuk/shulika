@@ -1,4 +1,3 @@
-import Icon from '@/assets/Icon'
 import Logo from '@/assets/Logo'
 import { IS_COMMUNITY_MODE } from '@/constants'
 import { cn } from '@/lib/utils'

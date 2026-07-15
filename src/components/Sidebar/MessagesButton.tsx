@@ -1,7 +1,6 @@
 import { useDmUnread } from '@/hooks/useDmUnread'
 import { usePrimaryPage } from '@/PageManager'
 import { useNostr } from '@/providers/NostrProvider'
-import { ChatCircleIcon } from '@phosphor-icons/react'
 import SidebarItem from './SidebarItem'
 
 export default function MessagesButton({ collapse }: { collapse: boolean }) {

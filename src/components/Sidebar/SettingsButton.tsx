@@ -1,7 +1,6 @@
 import { toSettings } from '@/lib/link'
 import { usePrimaryPage, useSecondaryPage } from '@/PageManager'
 import { useUserPreferences } from '@/providers/UserPreferencesProvider'
-import { GearSixIcon } from '@phosphor-icons/react'
 import SidebarItem from './SidebarItem'
 
 export default function SettingsButton({ collapse }: { collapse: boolean }) {

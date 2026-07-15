@@ -1,7 +1,6 @@
 import { usePrimaryPage } from '@/PageManager'
 import { useNostr } from '@/providers/NostrProvider'
 import { useNotification } from '@/providers/NotificationProvider'
-import { BellIcon } from '@phosphor-icons/react'
 import SidebarItem from './SidebarItem'
 
 export default function NotificationsButton({ collapse }: { collapse: boolean }) {

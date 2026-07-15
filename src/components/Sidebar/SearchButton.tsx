@@ -1,5 +1,4 @@
 import { usePrimaryPage } from '@/PageManager'
-import { MagnifyingGlassIcon } from '@phosphor-icons/react'
 import SidebarItem from './SidebarItem'
 
 export default function SearchButton({ collapse }: { collapse: boolean }) {
