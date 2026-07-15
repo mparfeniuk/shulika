@@ -125,11 +125,11 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
 
     if (totalBadgeCount === 0) {
       favicons.forEach((favicon) => {
-        favicon.href = '/favicon.ico'
+        favicon.href = '/favicon/favicon.ico'
       })
     } else {
       const img = document.createElement('img')
-      img.src = '/favicon.ico'
+      img.src = '/favicon/favicon.ico'
       img.onload = () => {
         const size = Math.max(img.width, img.height, 32)
         const canvas = document.createElement('canvas')
