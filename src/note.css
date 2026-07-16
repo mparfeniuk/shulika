@@ -13,7 +13,7 @@
     }
 
     &[data-eng-chars="false"] {
-      font-family: var(--font-eb-garamond), serif;
+      font-family: var(--font-cormorant), serif;
       font-weight: 600;
     }
     

@@ -195,7 +195,7 @@ export function detectLanguage(text?: string): string | null {
 export function hasUnsupportedFontCharacters(text: string): boolean {
   if (!text) return false;
 
-  const nonStandardLatinRegex = /(?![a-zA-Z])\p{Script=Latin}/gu;
+  const unsupportedRegex = /(?![a-zA-Z])\p{Script=Latin}|\p{Emoji}/gu;
 
-  return nonStandardLatinRegex.test(text);
+  return unsupportedRegex.test(text);
 }
