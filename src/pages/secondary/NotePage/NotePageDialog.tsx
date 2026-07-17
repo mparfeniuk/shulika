@@ -92,7 +92,7 @@ const DialogContent = React.forwardRef<
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
 
-      <div className="overflow-y-auto flex-1 min-h-0 pr-6 custom-scrollbar">
+      <div className="overflow-y-auto flex-1 min-h-0 pr-6 pt-12 custom-scrollbar">
         {children}
       </div>
       <div className="absolute bottom-0 z-10 flex h-40 w-full items-end justify-center bg-linear-to-b from-transparent to-background/90 pb-4"></div>
