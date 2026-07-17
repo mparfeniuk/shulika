@@ -16,7 +16,7 @@ import ZapList from '../ZapList'
 
 type TTabValue = 'replies' | 'quotes' | 'reactions' | 'reposts' | 'zaps'
 
-export default function NoteInteractions({ event, opPubkey }: { event: Event; opPubkey?: string }) {
+export default function NoteInteractions({ event, opPubkey, notStickyTabs }: { event: Event; opPubkey?: string; notStickyTabs?: boolean }) {
   const [type, setType] = useState<TTabValue>('replies')
   const { stuffKey } = useStuff(event)
   const noteStats = useStuffStatsById(stuffKey)
@@ -62,6 +62,7 @@ export default function NoteInteractions({ event, opPubkey }: { event: Event; op
   return (
     <>
       <Tabs
+        notStickyTabs={notStickyTabs}
         tabs={tabs}
         value={type}
         onTabChange={(tab) => setType(tab as TTabValue)}

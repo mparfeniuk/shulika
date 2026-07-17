@@ -188,7 +188,7 @@ export default function Content({
         ref={contentRef}
         dir="auto"
         className={cn(
-          'text-wrap wrap-break-word whitespace-pre-wrap',
+          'text-wrap wrap-break-word whitespace-pre-wrap max-w-[680px]',
           isEmojiOnly && 'flex items-end gap-1',
           className
         )}

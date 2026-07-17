@@ -28,7 +28,8 @@ export default function Tabs({
   onTabChange,
   onCustomize,
   options = null,
-  active = false
+  active = false,
+  notStickyTabs
 }: {
   tabs: TabDefinition[]
   value: string
@@ -36,6 +37,7 @@ export default function Tabs({
   onCustomize?: () => void
   options?: ReactNode
   active?: boolean
+  notStickyTabs?: boolean
 }) {
   const { t, i18n } = useTranslation()
   const { deepBrowsing } = useDeepBrowsing()
@@ -142,66 +144,67 @@ export default function Tabs({
       <div
         ref={containerRef}
         className={cn(
-          'sticky top-12 z-30 flex w-full justify-between border-b bg-background px-1 transition-all duration-300',
+          'flex w-full justify-between border-b bg-background px-1 transition-all duration-300',
           deepBrowsing && isSticky && !active
             ? '-translate-y-[calc(100%+12rem)]'
-            : ''
+            : '',
+          !notStickyTabs ? 'sticky top-12 z-30' : ''
         )}
       >
-      <ScrollArea className="w-0 flex-1" dir={dir}>
-        <div className="relative flex w-fit">
-          {tabs.map((tab, index) => (
+        <ScrollArea className="w-0 flex-1" dir={dir}>
+          <div className="relative flex w-fit">
+            {tabs.map((tab, index) => (
+              <div
+                key={tab.value}
+                ref={(el) => (tabRefs.current[index] = el)}
+                className={cn(
+                  `clickable relative my-1 w-fit cursor-pointer whitespace-nowrap rounded-xl px-3 py-2 text-center font-semibold text-md transition-all duration-200`,
+                  value === tab.value
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                )}
+                onClick={() => {
+                  onTabChange?.(tab.value)
+                }}
+              >
+                {t(tab.label)}
+                {tab.count != null && tab.count > 0 && (
+                  <span className="ms-1 align-middle text-xs font-semibold tabular-nums text-muted-foreground">
+                    {tab.count >= 100 ? '99+' : tab.count}
+                  </span>
+                )}
+                {tab.dot && (
+                  <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-primary" />
+                )}
+              </div>
+            ))}
+            {onCustomize && (
+              <div
+                className="clickable my-1 flex w-fit cursor-pointer items-center whitespace-nowrap rounded-xl px-3 py-2 text-muted-foreground transition-all duration-200 hover:text-foreground"
+                onClick={onCustomize}
+                title={t('Customize tabs')}
+                aria-label={t('Customize tabs')}
+              >
+                <SlidersHorizontal size={16} />
+              </div>
+            )}
             <div
-              key={tab.value}
-              ref={(el) => (tabRefs.current[index] = el)}
-              className={cn(
-                `clickable relative my-1 w-fit cursor-pointer whitespace-nowrap rounded-xl px-3 py-2 text-center font-semibold font-cormorant text-xl transition-all duration-200`,
-                value === tab.value
-                  ? 'text-foreground'
-                  : 'text-muted-foreground hover:text-foreground'
-              )}
-              onClick={() => {
-                onTabChange?.(tab.value)
+              className="absolute inset-x-0 bottom-0 rounded-t-full bg-amber-500 transition-all duration-200 h-[2px] opacity-100"
+              style={{
+                width: `${indicatorStyle.width}px`,
+                left: `${indicatorStyle.left}px`
               }}
-            >
-              {t(tab.label)}
-              {tab.count != null && tab.count > 0 && (
-                <span className="ms-1 align-middle text-xs font-semibold tabular-nums text-muted-foreground">
-                  {tab.count >= 100 ? '99+' : tab.count}
-                </span>
-              )}
-              {tab.dot && (
-                <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-primary" />
-              )}
-            </div>
-          ))}
-          {onCustomize && (
-            <div
-              className="clickable my-1 flex w-fit cursor-pointer items-center whitespace-nowrap rounded-xl px-3 py-2 text-muted-foreground transition-all duration-200 hover:text-foreground"
-              onClick={onCustomize}
-              title={t('Customize tabs')}
-              aria-label={t('Customize tabs')}
-            >
-              <SlidersHorizontal size={16} />
-            </div>
-          )}
-          <div
-            className="absolute bottom-0 h-1 rounded-full bg-linear-to-r from-primary to-primary-hover transition-all duration-300"
-            style={{
-              width: `${indicatorStyle.width}px`,
-              left: `${indicatorStyle.left}px`
-            }}
-          />
-        </div>
-        <ScrollBar orientation="horizontal" className="pointer-events-none opacity-0" />
-      </ScrollArea>
-      {hasOptions && (
-        <div className="flex items-center gap-1 py-1">
-          <Separator orientation="vertical" className="h-8" />
-          {options}
-        </div>
-      )}
-    </div>
+            />
+          </div>
+          <ScrollBar orientation="horizontal" className="pointer-events-none opacity-0" />
+        </ScrollArea>
+        {hasOptions && (
+          <div className="flex items-center gap-1 py-1">
+            <Separator orientation="vertical" className="h-8" />
+            {options}
+          </div>
+        )}
+      </div>
     </>
   )
 }

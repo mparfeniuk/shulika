@@ -87,10 +87,13 @@ export default function ImageWithLightbox({
               controller={{
                 closeOnBackdropClick: true,
                 closeOnPullUp: true,
-                closeOnPullDown: true
+                closeOnPullDown: true,
+              }}
+              noScroll={{
+                disabled: true
               }}
               styles={{
-                toolbar: { paddingTop: '2.25rem' }
+                root: { pointerEvents: 'auto' }
               }}
             />
           </div>,

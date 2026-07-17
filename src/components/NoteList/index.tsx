@@ -521,7 +521,7 @@ const NoteList = forwardRef<
     return (
       <div>
         <div ref={topRef} className="scroll-mt-24.25" />
-        {initialLoading && shouldShowLoadingIndicator && <LoadingBar />}
+        {/* {initialLoading && shouldShowLoadingIndicator && <LoadingBar />} */} 
         <PullToRefresh
           onRefresh={async () => {
             refresh()

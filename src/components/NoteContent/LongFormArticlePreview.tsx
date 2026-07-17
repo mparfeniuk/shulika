@@ -42,7 +42,7 @@ export default function LongFormArticlePreview({
   )
 
   const summaryComponent = metadata.summary && (
-    <div className="text-muted-foreground line-clamp-4 text-sm whitespace-pre-line">
+    <div className="text-muted-foreground line-clamp-4 text-sm whitespace-pre-line max-w-[680px]">
       {metadata.summary}
     </div>
   )

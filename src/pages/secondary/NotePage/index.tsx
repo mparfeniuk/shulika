@@ -21,10 +21,11 @@ import { Card } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ExtendedKind } from '@/constants'
-import { isRepostEvent, useFetchEvent, useRepostTarget } from '@/hooks'
+import { isRepostEvent, useFetchEvent, useMediaQuery, useRepostTarget } from '@/hooks'
 import { useAncestorChain } from '@/hooks/useThread'
 import SecondaryPageLayout from '@/layouts/SecondaryPageLayout'
 import {
+  getEventAuthorPubkey,
   getEventKey,
   getKeyFromTag,
   getParentBech32Id,
@@ -32,7 +33,6 @@ import {
   getRootBech32Id,
   getRootTag
 } from '@/lib/event'
-import { getEventAuthorPubkey } from '@/lib/event'
 import { toExternalContent, toNote } from '@/lib/link'
 import { tagNameEquals } from '@/lib/tag'
 import { cn } from '@/lib/utils'
@@ -54,6 +54,9 @@ import {
 } from 'react'
 import { useTranslation } from 'react-i18next'
 import NotFound from './NotFound'
+
+import { DeepBrowsingProvider } from '@/providers/DeepBrowsingProvider'
+import { Dialog, DialogContent, DialogTitle } from './NotePageDialog'
 
 const NotePage = forwardRef<TPageRef, { id?: string; index?: number }>(({ id, index }, ref) => {
   const { t } = useTranslation()
@@ -107,6 +110,9 @@ const NotePage = forwardRef<TPageRef, { id?: string; index?: number }>(({ id, in
     return chain
   }, [rootEvent, parentEvent, ancestorChain])
   const layoutRef = useRef<TPageRef>(null)
+  const isDesktop = useMediaQuery(1100)
+  const contentInDialog = event?.kind === 30023 && isDesktop
+
 
   useImperativeHandle(
     ref,
@@ -175,6 +181,51 @@ const NotePage = forwardRef<TPageRef, { id?: string; index?: number }>(({ id, in
     )
   }
 
+  const firstBlock = <>
+    {reposters && <RepostDescription reposters={reposters} />}
+    <Note
+      key={`note-${event.id}`}
+      event={event}
+      className="select-text"
+      hideParentNotePreview
+      originalNoteId={isRepost ? undefined : id}
+      showFull
+      opPubkey={opPubkey}
+    />
+    <StuffStats
+      className="mt-3"
+      classNames={{ topList: '-mx-4', topListContent: 'px-4' }}
+      stuff={event}
+      fetchIfNotExisting
+      displayTopZapsAndLikes
+    />
+  </>
+
+  const secondBlock = <><Separator className="mt-4" />
+    <NoteInteractions key={`note-interactions-${event.id}`} event={event} opPubkey={opPubkey} notStickyTabs={contentInDialog} /></>
+
+  if (contentInDialog) {
+    return (
+      <Dialog open={true}>
+        <DialogContent className="note-dialog-wrapper">
+          <div className="note-dialog">
+            <DialogTitle></DialogTitle>
+            <DeepBrowsingProvider active={true}>
+              {rootITag && (
+                <div className="px-4 pt-3">
+                  <ExternalRoot value={rootITag[1]} />
+                </div>
+              )}
+              {reposters && <RepostDescription reposters={reposters} />}
+              {firstBlock}
+              {secondBlock}
+            </DeepBrowsingProvider>
+          </div>
+        </DialogContent>
+      </Dialog>
+    )
+  }
+
   return (
     <SecondaryPageLayout ref={layoutRef} index={index} title={t('Note')} displayScrollToTopButton>
       <div>
@@ -185,59 +236,43 @@ const NotePage = forwardRef<TPageRef, { id?: string; index?: number }>(({ id, in
         )}
         {expanded
           ? fullChain.map((id, idx) => (
-              <ChainItem
-                key={`chain-${id}`}
-                eventId={id}
-                isFirst={idx === 0 && !rootITag}
-                opPubkey={opPubkey}
-              />
-            ))
+            <ChainItem
+              key={`chain-${id}`}
+              eventId={id}
+              isFirst={idx === 0 && !rootITag}
+              opPubkey={opPubkey}
+            />
+          ))
           : canExpand && (
-              <div className={cn('px-4', !rootITag && 'pt-3')}>
-                {rootEventId && hasDistinctRootAndParent && (
-                  <ParentNote
-                    key={`root-note-${event.id}`}
-                    isFetching={isFetchingRootEvent}
-                    event={rootEvent}
-                    eventBech32Id={rootEventId}
-                    isConsecutive={isConsecutive(rootEvent, parentEvent)}
-                  />
-                )}
-                {parentEventId && (
-                  <ParentNote
-                    key={`parent-note-${event.id}`}
-                    isFetching={isFetchingParentEvent}
-                    event={parentEvent}
-                    eventBech32Id={parentEventId}
-                    noConnector
-                  />
-                )}
-                {autoLoadProfilePicture && <div className="bg-border ms-4.75 h-1.5 w-0.5" />}
-              </div>
-            )}
+            <div className={cn('px-4', !rootITag && 'pt-3')}>
+              {rootEventId && hasDistinctRootAndParent && (
+                <ParentNote
+                  key={`root-note-${event.id}`}
+                  isFetching={isFetchingRootEvent}
+                  event={rootEvent}
+                  eventBech32Id={rootEventId}
+                  isConsecutive={isConsecutive(rootEvent, parentEvent)}
+                />
+              )}
+              {parentEventId && (
+                <ParentNote
+                  key={`parent-note-${event.id}`}
+                  isFetching={isFetchingParentEvent}
+                  event={parentEvent}
+                  eventBech32Id={parentEventId}
+                  noConnector
+                />
+              )}
+              {autoLoadProfilePicture && <div className="bg-border ms-4.75 h-1.5 w-0.5" />}
+            </div>
+          )}
         {canExpand && <ExpandThreadButton expanded={expanded} onToggle={handleToggleExpand} />}
         <div className={cn('relative px-4 pt-3', canExpand && 'pt-1')}>
           {reposters && <RepostDescription reposters={reposters} />}
-          <Note
-            key={`note-${event.id}`}
-            event={event}
-            className="select-text"
-            hideParentNotePreview
-            originalNoteId={isRepost ? undefined : id}
-            showFull
-            opPubkey={opPubkey}
-          />
-          <StuffStats
-            className="mt-3"
-            classNames={{ topList: '-mx-4', topListContent: 'px-4' }}
-            stuff={event}
-            fetchIfNotExisting
-            displayTopZapsAndLikes
-          />
+          {firstBlock}
         </div>
       </div>
-      <Separator className="mt-4" />
-      <NoteInteractions key={`note-interactions-${event.id}`} event={event} opPubkey={opPubkey} />
+      {secondBlock}
     </SecondaryPageLayout>
   )
 })
