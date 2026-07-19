@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap');
 @import url('./custom.css');
 @import url('./note.css');
 
@@ -67,10 +67,13 @@
 
   --animate-shimmer: shimmer 3s ease-in-out infinite;
   --font-cormorant: 'Cormorant Garamond', serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-lora: 'Lora', serif;
   --font-eb-garamond: 'EB Garamond', serif;
   --font-agnostric: 'AgnostricFont', 'EB Garamond', sans-serif;
+}
+
+@utility agnostric-bg {
+    background-image: url("/black-paper.png");
 }
 
 /*
@@ -116,13 +119,12 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground agnostric-bg;
     -webkit-overflow-scrolling: touch;
     text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     user-select: none;
     background-color: #000000;
-    background-image: url("/black-paper.png");
     background-attachment: fixed;
   }
 

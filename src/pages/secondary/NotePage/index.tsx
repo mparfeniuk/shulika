@@ -112,10 +112,8 @@ const NotePage = forwardRef<TPageRef, { id?: string; index?: number }>(({ id, in
   const layoutRef = useRef<TPageRef>(null)
   const isDesktop = useMediaQuery(1100)
   const contentInDialog = event?.kind === 30023 && isDesktop
-  const { currentIndex } = useSecondaryPage();
-  const isActive = currentIndex === index;
-
-
+  const { currentIndex } = useSecondaryPage()
+  const isActive = currentIndex === index
 
   useImperativeHandle(
     ref,

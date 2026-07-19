@@ -8,22 +8,17 @@ import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { Separator } from '@/components/ui/separator'
 import UserAvatar, { SimpleUserAvatar } from '@/components/UserAvatar'
 import Username, { SimpleUsername } from '@/components/Username'
-import { formatNpub } from '@/lib/pubkey'
 import { toBookmarks, toProfile, toRelaySettings, toSettings, toWallet } from '@/lib/link'
+import { formatNpub } from '@/lib/pubkey'
 import { cn } from '@/lib/utils'
 import { useSecondaryPage } from '@/PageManager'
 import { useNostr } from '@/providers/NostrProvider'
 import {
   ArrowDownUp,
-  Bookmark,
   Check,
   Copy,
   LogOut,
-  QrCode,
-  Server,
-  Settings,
-  UserRound,
-  Wallet
+  QrCode
 } from 'lucide-react'
 import { nip19 } from 'nostr-tools'
 import { HTMLProps, useMemo, useState } from 'react'
@@ -59,7 +54,7 @@ export default function MeDrawerContent({ onClose }: { onClose?: () => void }) {
   }
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col agnostric-bg">
       {/* Header */}
       <div className="px-5 pb-4 pt-4">
         <div className="flex justify-end">
@@ -74,7 +69,7 @@ export default function MeDrawerContent({ onClose }: { onClose?: () => void }) {
                 <div className="pointer-events-none flex w-full items-center gap-2 px-1">
                   <UserAvatar size="big" userId={pubkey} />
                   <div className="w-0 flex-1">
-                    <Username userId={pubkey} className="truncate text-2xl font-semibold" />
+                    <Username userId={pubkey} className="truncate text-2xl font-agnostric" />
                     <Nip05 pubkey={pubkey} />
                   </div>
                 </div>
@@ -88,7 +83,7 @@ export default function MeDrawerContent({ onClose }: { onClose?: () => void }) {
           <SimpleUserAvatar userId={pubkey} size="big" className="shrink-0" />
           <div className="min-w-0">
             <SimpleUsername
-              className="truncate text-xl font-semibold"
+              className="truncate text-xl font-agnostric"
               userId={pubkey}
               skeletonClassName="h-6 w-28"
             />
@@ -106,25 +101,20 @@ export default function MeDrawerContent({ onClose }: { onClose?: () => void }) {
       <Separator />
 
       {/* Menu */}
-      <div className="flex-1 px-2 py-1">
+      <div className="flex-1 px-1 py-1">
         <Item onClick={() => navigate(toProfile(pubkey))}>
-          <UserRound />
           {t('Profile')}
         </Item>
         <Item onClick={() => navigate(toRelaySettings())}>
-          <Server />
           {t('Relays')}
         </Item>
         <Item onClick={() => navigate(toBookmarks())}>
-          <Bookmark />
           {t('Bookmarks')}
         </Item>
         <Item onClick={() => navigate(toWallet())}>
-          <Wallet />
           {t('Wallet')}
         </Item>
         <Item onClick={() => navigate(toSettings())}>
-          <Settings />
           {t('Settings')}
         </Item>
       </div>
@@ -159,12 +149,12 @@ function Item({
   return (
     <div
       className={cn(
-        'clickable flex h-12 items-center rounded-lg px-3 py-2 [&_svg]:size-5 [&_svg]:shrink-0',
+        'clickable font-cormorant flex h-10 items-center rounded-lg px-3 [&_svg]:size-5 [&_svg]:shrink-0',
         className
       )}
       {...props}
     >
-      <div className="flex items-center gap-3 text-base font-medium">{children}</div>
+      <div className="flex items-center gap-2 text-xl font-medium">{children}</div>
     </div>
   )
 }

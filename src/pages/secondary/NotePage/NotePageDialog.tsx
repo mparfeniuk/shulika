@@ -73,8 +73,27 @@ const DialogContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => {
   const { pop } = useSecondaryPage();
 
+  React.useEffect(() => {
+    const handleKeyDown = (event: { key: string }) => {
+      if (event.key === 'Escape') {
+        pop();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [pop]);
+
+  const closeDialog = (e: { stopPropagation: () => void }) => {
+    e.stopPropagation()
+    pop()
+  }
+
   return (<DialogPortal>
-    <DialogOverlay />
+    <DialogOverlay onClick={closeDialog} />
     <DialogPrimitive.Content
       onInteractOutside={(e) => e.preventDefault()}
       ref={ref}
@@ -84,10 +103,7 @@ const DialogContent = React.forwardRef<
       )}
       {...props}
     >
-      <DialogPrimitive.Close onClick={(e) => {
-        e.stopPropagation()
-        pop()
-      }} className="absolute right-4 top-4 rounded-lg p-1 opacity-70 ring-offset-background transition-all hover:bg-accent hover:opacity-100 outline-hidden ring-2 ring-ring ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground z-10">
+      <DialogPrimitive.Close onClick={closeDialog} className="absolute right-4 top-4 rounded-lg p-1 opacity-70 ring-offset-background transition-all hover:bg-accent hover:opacity-100 outline-hidden ring-2 ring-ring ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground z-10">
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>

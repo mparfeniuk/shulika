@@ -1,6 +1,6 @@
-import QRCodeStyling from 'qr-code-styling'
-import { useEffect, useRef } from 'react'
-import iconSvg from '../../assets/favicon.svg'
+import QRCodeStyling from 'qr-code-styling';
+import { useEffect, useRef } from 'react';
+import iconSvg from '../../assets/agnostric-a.png';
 
 export default function QrCode({ value, size = 180 }: { value: string; size?: number }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -18,14 +18,25 @@ export default function QrCode({ value, size = 180 }: { value: string; size?: nu
         height: size * pixelRatio,
         data: value,
         dotsOptions: {
-          type: 'extra-rounded'
+          color: '#f6be6199',
+          type: 'dots',
         },
-        cornersDotOptions: {
-          type: 'extra-rounded'
+        backgroundOptions: {
+          color: 'transparent',
         },
         cornersSquareOptions: {
-          type: 'extra-rounded'
-        }
+          color: '#f6be6199',
+          type: 'extra-rounded',
+        },
+        cornersDotOptions: {
+          color: '#f6be6199',
+          type: 'dot',
+        },
+        imageOptions: {
+          crossOrigin: 'anonymous',
+          margin: 6,
+          imageSize: 0.4,
+        },
       })
 
       if (ref.current) {
@@ -47,7 +58,7 @@ export default function QrCode({ value, size = 180 }: { value: string; size?: nu
   }, [value, size])
 
   return (
-    <div className="overflow-hidden rounded-2xl bg-white p-2">
+    <div className="overflow-hidden rounded-2xl p-2">
       <div ref={ref} />
     </div>
   )

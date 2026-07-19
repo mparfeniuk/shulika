@@ -300,32 +300,32 @@ export function PageManager({ maxStackSize = 5 }: { maxStackSize?: number }) {
           <CurrentRelaysProvider>
             <NotificationProvider>
               <div style={{ '--bottom-bar-offset': bottomBarOffset } as React.CSSProperties}>
-              {!!secondaryStack.length &&
-                secondaryStack.map((item, index) => (
+                {!!secondaryStack.length &&
+                  secondaryStack.map((item, index) => (
+                    <div
+                      key={item.index}
+                      style={{
+                        display: index === secondaryStack.length - 1 ? 'block' : 'none'
+                      }}
+                    >
+                      {item.element}
+                    </div>
+                  ))}
+                {primaryPages.map(({ name, element, props }) => (
                   <div
-                    key={item.index}
+                    key={name}
                     style={{
-                      display: index === secondaryStack.length - 1 ? 'block' : 'none'
+                      display:
+                        secondaryStack.length === 0 && currentPrimaryPage === name ? 'block' : 'none'
                     }}
                   >
-                    {item.element}
+                    {props ? cloneElement(element as React.ReactElement, props) : element}
                   </div>
                 ))}
-              {primaryPages.map(({ name, element, props }) => (
-                <div
-                  key={name}
-                  style={{
-                    display:
-                      secondaryStack.length === 0 && currentPrimaryPage === name ? 'block' : 'none'
-                  }}
-                >
-                  {props ? cloneElement(element as React.ReactElement, props) : element}
-                </div>
-              ))}
-              {!bottomBarHidden && <BottomNavigationBar />}
-              <TooManyRelaysAlertDialog />
-              <DraftBox />
-              <DraftEditorHost />
+                {!bottomBarHidden && <BottomNavigationBar />}
+                <TooManyRelaysAlertDialog />
+                <DraftBox />
+                <DraftEditorHost />
               </div>
             </NotificationProvider>
           </CurrentRelaysProvider>
@@ -422,9 +422,9 @@ export function PageManager({ maxStackSize = 5 }: { maxStackSize?: number }) {
       >
         <CurrentRelaysProvider>
           <NotificationProvider>
-            <div className="flex flex-col items-center bg-surface-background">
+            <div className="flex flex-col items-center">
               <div
-                className="flex h-(--vh) w-full bg-surface-background"
+                className="flex h-(--vh) w-full"
                 style={{
                   maxWidth: '1920px'
                 }}
@@ -438,7 +438,7 @@ export function PageManager({ maxStackSize = 5 }: { maxStackSize?: number }) {
                 >
                   <div
                     className={cn(
-                      'overflow-hidden bg-background',
+                      'overflow-hidden bg-accent/40',
                       themeSetting === 'pure-black' ? 'border-s' : 'rounded-2xl shadow-lg'
                     )}
                   >
@@ -456,7 +456,7 @@ export function PageManager({ maxStackSize = 5 }: { maxStackSize?: number }) {
                   </div>
                   <div
                     className={cn(
-                      'overflow-hidden bg-background',
+                      'overflow-hidden bg-accent/40',
                       themeSetting === 'pure-black' ? 'border-s' : 'rounded-2xl',
                       themeSetting !== 'pure-black' && secondaryStack.length > 0 && 'shadow-lg',
                       secondaryStack.length === 0 ? 'bg-surface' : ''

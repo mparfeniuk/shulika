@@ -53,7 +53,7 @@ export default function LongFormArticlePreview({
         {metadata.image && autoLoadMedia && (
           <Image
             image={{ url: metadata.image, pubkey: event.pubkey }}
-            className="aspect-video w-full"
+            className="aspect-video w-full mb-2"
             hideIfError
           />
         )}

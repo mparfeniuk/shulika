@@ -73,6 +73,7 @@
     @apply py-0 mb-8 pr-4 relative italic;
     line-height: 1.8;
     text-indent: 0px;
+    text-wrap: balance;
 
     &::before {
       content: "“";
@@ -81,8 +82,13 @@
       @apply absolute;
       @apply text-6xl text-primary not-italic select-none pointer-events-none;
       line-height: 0;
+      top: 15px;
       left: -30px;
-      top: 10px;
+
+      @media (max-width: 1100px) {
+          left: 0px;
+          top:7px;
+      }
     }
 
     p {
@@ -108,9 +114,8 @@
 }
 
 .note-dialog-wrapper {
-  @apply max-w-[1100px] max-h-[97vh] overflow-y-auto py-15;
+  @apply max-w-[1100px] max-h-[97vh] overflow-y-auto py-15 agnostric-bg;
   background-color: #000000;
-  background-image: url("/black-paper.png");
 }
 
 .note-dialog {
