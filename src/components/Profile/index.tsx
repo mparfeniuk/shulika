@@ -132,7 +132,7 @@ export default function Profile({ id }: { id?: string }) {
               </>
             )}
           </div>
-          <div className="pt-2">
+          <div className="pt-4">
             <div className="flex items-center gap-2">
               <TextWithEmojis
                 text={username}

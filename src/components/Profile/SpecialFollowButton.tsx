@@ -44,7 +44,7 @@ export default function SpecialFollowButton({ pubkey }: { pubkey: string }) {
       {updating ? (
         <Loader className="animate-spin" />
       ) : (
-        <Star className={pinned ? 'fill-primary stroke-primary' : ''} />
+        <Star className={pinned ? 'fill-primary stroke-primary' : 'stroke-amber-50/80'} />
       )}
     </Button>
   )
