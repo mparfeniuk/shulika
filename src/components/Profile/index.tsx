@@ -124,7 +124,7 @@ export default function Profile({ id }: { id?: string }) {
                     onClick={() => push(toDmConversation(pubkey))}
                     title={canStartDm ? t('Message') : undefined}
                   >
-                    <MessageSquare className="h-4 w-4" />
+                    <MessageSquare className="h-4 w-4 text-amber-50" />
                   </Button>
                 </span>
                 <SpecialFollowButton pubkey={pubkey} />
@@ -132,12 +132,12 @@ export default function Profile({ id }: { id?: string }) {
               </>
             )}
           </div>
-          <div className="pt-4">
+          <div className="pt-3">
             <div className="flex items-center gap-2">
               <TextWithEmojis
                 text={username}
                 emojis={emojis}
-                className={`${hasUnsupportedFontCharacters(username) ? 'font-cormorant font-semibold' : 'agnostric-decor-text'} truncate text-3xl select-text text-amber-50/80`}
+                className={`${hasUnsupportedFontCharacters(username) ? 'font-cormorant font-semibold' : 'agnostric-decor-text'} truncate text-3xl select-text text-amber-50/90`}
               />
               <TrustScoreBadge pubkey={pubkey} />
               {isFollowingYou && (
@@ -168,7 +168,7 @@ export default function Profile({ id }: { id?: string }) {
               <ProfileAbout
                 about={about}
                 emojis={emojis}
-                className="mt-2 text-wrap text-amber-50/80 wrap-break-word whitespace-pre-wrap select-text"
+                className="mt-2 text-wrap text-amber-50/90 wrap-break-word whitespace-pre-wrap select-text"
               />
             </Collapsible>
             {website && (

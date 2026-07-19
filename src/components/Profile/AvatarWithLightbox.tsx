@@ -25,7 +25,7 @@ export default function AvatarWithLightbox({ userId }: { userId: string }) {
       className="object-cover object-center"
       classNames={{
         wrapper:
-          'shrink-0 rounded-full bg-background w-28 h-28 absolute start-3 bottom-0 translate-y-1/2 border-4 border-background'
+          'shrink-0 rounded-full bg-background w-25 h-25 absolute start-3 bottom-0 translate-y-1/2 border-4 border-background'
       }}
       ignoreAutoLoadPolicy
     />
