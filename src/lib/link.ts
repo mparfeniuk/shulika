@@ -9,7 +9,7 @@ export const toNote = (eventOrId: Event | string) => {
   return `/notes/${nevent}`
 }
 export const toJumbleNote = (eventOrId: Event | string) => {
-  return `https://agnostric.social${toNote(eventOrId)}`
+  return `https://agnostric.space${toNote(eventOrId)}`
 }
 export const toNoteList = ({
   hashtag,
