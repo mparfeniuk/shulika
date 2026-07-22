@@ -156,5 +156,11 @@
   },
   "optionalDependencies": {
     "electron": "^41.5.0"
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
