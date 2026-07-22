@@ -72,42 +72,42 @@ export default defineConfig(({ mode }) => {
         workbox: {
           globPatterns: ['**/*.{js,css,html,png,jpg,svg}'],
           globDirectory: 'dist/',
-          maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+          maximumFileSizeToCacheInBytes: 7 * 1024 * 1024, // 💡 Підняли до 7MB
           cleanupOutdatedCaches: true
         },
         devOptions: {
           enabled: true
         },
         manifest: {
-          name: 'Jumble',
-          short_name: 'Jumble',
+          name: 'Agnostric',
+          short_name: 'Agnostric',
           icons: [
             {
-              src: '/pwa-512x512.png',
+              src: '/favicon/android-chrome-512x512.png',
               sizes: '512x512',
               type: 'image/png',
               purpose: 'any'
             },
             {
-              src: '/pwa-192x192.png',
+              src: '/favicon/android-chrome-192x192.png',
               sizes: '192x192',
               type: 'image/png',
               purpose: 'any'
             },
             {
-              src: '/pwa-512x512.png',
+              src: '/favicon/android-chrome-512x512.png',
               sizes: '512x512',
               type: 'image/png',
               purpose: 'maskable'
             },
             {
-              src: '/pwa-192x192.png',
+              src: '/favicon/android-chrome-192x192.png',
               sizes: '192x192',
               type: 'image/png',
               purpose: 'maskable'
             },
             {
-              src: '/pwa-monochrome.svg',
+              src: '/favicon/android-chrome-512x512.png',
               sizes: '512x512',
               type: 'image/svg+xml',
               purpose: 'monochrome'
@@ -139,6 +139,18 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src')
+      }
+    },
+    // 💡 Додано розбиття коду для оптимізації розміру бандлу:
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              return 'vendor'
+            }
+          }
+        }
       }
     },
     plugins
