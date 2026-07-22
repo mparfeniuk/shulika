@@ -95,7 +95,7 @@ export default {
     'Add an Account': 'Dodaj Konto',
     'More options': 'Więcej opcji',
     'Add client tag': 'Dodaj tag klienta',
-    'Show others this was sent via Jumble': 'Pokaż innym, że zostało to wysłane przez Jumble',
+    'Show others this was sent via Agnostric': 'Pokaż innym, że zostało to wysłane przez Jumble',
     'Are you sure you want to logout?': 'Czy na pewno chcesz się wylogować?',
     'relay sets': 'Zestawy transmiterów',
     edit: 'edytuj',

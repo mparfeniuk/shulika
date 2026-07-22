@@ -95,7 +95,7 @@ export default {
     'Add an Account': 'अकाउंट जोड़ें',
     'More options': 'अधिक विकल्प',
     'Add client tag': 'क्लाइंट टैग जोड़ें',
-    'Show others this was sent via Jumble':
+    'Show others this was sent via Agnostric':
       'दूसरों को दिखाएं कि यह Jumble के माध्यम से भेजा गया था',
     'Are you sure you want to logout?': 'क्या आप वाकई लॉगआउट करना चाहते हैं?',
     'relay sets': 'रिले सेट',

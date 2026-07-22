@@ -2,7 +2,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/h
 import { Skeleton } from '@/components/ui/skeleton'
 import { useFetchProfile } from '@/hooks'
 import { toProfile } from '@/lib/link'
-import { cn, hasUnsupportedFontCharacters, isTouchDevice } from '@/lib/utils'
+import { cn, isTouchDevice } from '@/lib/utils'
 import { SecondaryPageLink } from '@/PageManager'
 import { useMemo } from 'react'
 import ProfileCard from '../ProfileCard'
@@ -33,17 +33,15 @@ export default function Username({
     )
   }
   if (!profile) return null
-  const additionalClass = !hasUnsupportedFontCharacters(profile.username) && specFont ? 'font-agnostric' : '';
-
   const trigger = (
     <div dir="auto" className={className}>
       <SecondaryPageLink
         to={toProfile(userId)}
-        className={cn('truncate', additionalClass)}
+        className={cn('truncate')}
         onClick={(e) => e.stopPropagation()}
       >
         {showAt && '@'}
-        <TextWithEmojis text={profile.username} emojis={profile.emojis} emojiClassName="mb-1" />
+        <TextWithEmojis text={profile.username} emojis={profile.emojis} emojiClassName="mb-1" useFallbackFont={!!specFont} />
       </SecondaryPageLink>
     </div>
   )
@@ -88,12 +86,10 @@ export function SimpleUsername({
   if (!profile) return null
 
   const { username, emojis } = profile
-  const additionalClass = !hasUnsupportedFontCharacters(username) && specFont ? 'font-agnostric' : '';
-
   return (
-    <div dir="auto" className={cn(className, additionalClass)}>
+    <div dir="auto" className={cn(className)}>
       {showAt && '@'}
-      <TextWithEmojis text={username} emojis={emojis} emojiClassName="mb-1" />
+      <TextWithEmojis text={username} emojis={emojis} emojiClassName="mb-1" useFallbackFont={!!specFont} />
     </div>
   )
 }

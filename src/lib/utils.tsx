@@ -1,3 +1,4 @@
+
 import {
   EMAIL_REGEX,
   EMBEDDED_EVENT_REGEX,
@@ -192,10 +193,59 @@ export function detectLanguage(text?: string): string | null {
   }
 }
 
-export function hasUnsupportedFontCharacters(text: string): boolean {
-  if (!text) return false;
+interface FormatTextOptions {
+  /** Main font class (e.g., 'font-agnostric') */
+  fontClass: string;
+  /** Fallback font class for special characters (e.g., 'font-sans') */
+  fallbackFontClass: string;
+}
 
-  const unsupportedRegex = /(?![a-zA-Z])\p{Script=Latin}|\p{Emoji}/gu;
+export function formatTextWithFontFallback(
+  text: string,
+  { fontClass, fallbackFontClass }: FormatTextOptions
+): React.ReactNode {
+  if (!text) return null;
 
-  return unsupportedRegex.test(text);
+  // Regex definitions:
+  // 1. Match emoji characters
+  const emojiRegex = /\p{Emoji_Presentation}|\p{Extended_Pictographic}/gu;
+
+  // 2. Match non-standard Latin characters / special characters (excluding standard A-Z, a-z)
+  const specialCharsRegex = /(?![a-zA-Z])\p{Script=Latin}/gu;
+
+  // If the text contains special characters, use fallback font as the primary font
+  const hasSpecialChars = specialCharsRegex.test(text);
+  const activeFontClass = hasSpecialChars ? fallbackFontClass : fontClass;
+
+  // Split text into chunks, preserving emoji matches in the array
+  const parts = text.split(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu);
+
+  return (
+    <>
+      {parts.map((part, index) => {
+        if (!part) return null;
+
+        // Check if current chunk is an emoji
+        const isEmoji = emojiRegex.test(part);
+        // Reset lastIndex to ensure accurate subsequent .test() executions
+        emojiRegex.lastIndex = 0;
+
+        if (isEmoji) {
+          // Render emojis without font classes to prevent font overrides
+          return (
+            <span key={index} className="inline-block">
+              {part}
+            </span>
+          );
+        }
+
+        // Render regular text with the designated font class
+        return (
+          <span key={index} className={activeFontClass}>
+            {part}
+          </span>
+        );
+      })}
+    </>
+  );
 }

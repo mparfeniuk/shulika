@@ -7,7 +7,7 @@ import { useTranslatedEvent } from '@/hooks'
 import { getLongFormArticleMetadataFromEvent } from '@/lib/event-metadata'
 import { toNote, toNoteList, toProfile } from '@/lib/link'
 import { estimateReadingMinutes } from '@/lib/markdown'
-import { hasUnsupportedFontCharacters } from '@/lib/utils'
+import { formatTextWithFontFallback } from '@/lib/utils'
 import { ExternalLink } from 'lucide-react'
 import { Event, kinds } from 'nostr-tools'
 import { useMemo, useRef, useState } from 'react'
@@ -114,13 +114,15 @@ export default function LongFormArticle({
     [metadata.image, baseComponents]
   )
 
+  const titleProcessed = formatTextWithFontFallback(metadata.title, { fontClass: 'font-agnostric', fallbackFontClass: 'font-cormorant font-semibold' });
+
   return (
     <>
       <div
         ref={contentRef}
         className={`overflow-wrap-anywhere lfa-note max-w-none wrap-break-word prose-img:my-0 ${className || ''}`}
       >
-        <h1 data-eng-chars={!hasUnsupportedFontCharacters(metadata.title)} className="wrap-break-word note-title">{metadata.title}</h1>
+        <h1 className="wrap-break-word note-title">{titleProcessed}</h1>
         <div className="mb-10 text-sm text-muted-foreground">
           {t('{{count}} min read', { count: readingMinutes })}
           <span className="mx-1.5">❃</span>

@@ -95,7 +95,7 @@ export default {
     'Add an Account': '계정 추가',
     'More options': '더 많은 옵션',
     'Add client tag': '클라이언트 태그 추가',
-    'Show others this was sent via Jumble': '이 노트가 Jumble을 통해 전송되었음을 표시',
+    'Show others this was sent via Agnostric': '이 노트가 Jumble을 통해 전송되었음을 표시',
     'Are you sure you want to logout?': '로그아웃 하시겠습니까?',
     'relay sets': '릴레이 세트',
     edit: '편집',

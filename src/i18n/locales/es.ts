@@ -96,7 +96,7 @@ export default {
     'Add an Account': 'Agregar una cuenta',
     'More options': 'Más opciones',
     'Add client tag': 'Agregar etiqueta de cliente',
-    'Show others this was sent via Jumble': 'Mostrar a otros que esto se envió vía Jumble',
+    'Show others this was sent via Agnostric': 'Mostrar a otros que esto se envió vía Jumble',
     'Are you sure you want to logout?': '¿Estás seguro de que deseas cerrar sesión?',
     'relay sets': 'conjuntos de relés',
     edit: 'editar',

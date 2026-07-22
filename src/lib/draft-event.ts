@@ -20,10 +20,10 @@ import { sha256 } from '@noble/hashes/sha2'
 import dayjs from 'dayjs'
 import { Event, kinds, nip19 } from 'nostr-tools'
 import {
+  getEventAuthorPubkey,
   getReplaceableCoordinate,
   getReplaceableCoordinateFromEvent,
   getRootTag,
-  getEventAuthorPubkey,
   isProtectedEvent,
   isReplaceableEvent
 } from './event'
@@ -948,7 +948,7 @@ function buildResponseTag(value: string) {
 }
 
 function buildClientTag() {
-  return ['client', 'jumble']
+  return ['client', 'agnostric']
 }
 
 function buildNsfwTag() {

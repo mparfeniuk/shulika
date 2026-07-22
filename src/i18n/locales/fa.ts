@@ -95,7 +95,7 @@ export default {
     'Add an Account': 'افزودن حساب',
     'More options': 'گزینه‌های بیشتر',
     'Add client tag': 'افزودن برچسب کلاینت',
-    'Show others this was sent via Jumble': 'به دیگران نشان دهید که از طریق Jumble ارسال شده',
+    'Show others this was sent via Agnostric': 'به دیگران نشان دهید که از طریق Jumble ارسال شده',
     'Are you sure you want to logout?': 'آیا مطمئن هستید که می‌خواهید خارج شوید؟',
     'relay sets': 'مجموعه‌های رله',
     edit: 'ویرایش',

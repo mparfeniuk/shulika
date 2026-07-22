@@ -95,7 +95,7 @@ export default {
     'Add an Account': 'เพิ่มบัญชี',
     'More options': 'ตัวเลือกเพิ่มเติม',
     'Add client tag': 'เพิ่มแท็กไคลเอนต์',
-    'Show others this was sent via Jumble': 'แสดงให้ผู้อื่นเห็นว่าส่งผ่าน Jumble',
+    'Show others this was sent via Agnostric': 'แสดงให้ผู้อื่นเห็นว่าส่งผ่าน Jumble',
     'Are you sure you want to logout?': 'คุณแน่ใจหรือไม่ว่าต้องการออกจากระบบ?',
     'relay sets': 'ชุดรีเลย์',
     edit: 'แก้ไข',

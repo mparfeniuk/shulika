@@ -50,7 +50,7 @@ export default function PostOptions({
           />
         </div>
         <div className="text-xs text-muted-foreground">
-          {t('Show others this was sent via Jumble')}
+          {t('Show others this was sent via Agnostric')}
         </div>
       </div>
 

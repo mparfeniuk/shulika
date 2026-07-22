@@ -95,7 +95,7 @@ export default {
     'Add an Account': 'Hesap Ekle',
     'More options': 'Daha fazla seçenek',
     'Add client tag': 'İstemci etiketi ekle',
-    'Show others this was sent via Jumble': 'Diğerlerine bunun Jumble ile gönderildiğini göster',
+    'Show others this was sent via Agnostric': 'Diğerlerine bunun Jumble ile gönderildiğini göster',
     'Are you sure you want to logout?': 'Çıkış yapmak istediğinizden emin misiniz?',
     'relay sets': 'relay setleri',
     edit: 'düzenle',

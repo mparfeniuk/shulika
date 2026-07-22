@@ -94,7 +94,7 @@ export default {
     'Add an Account': '新增帳戶',
     'More options': '更多選項',
     'Add client tag': '新增客戶端標籤',
-    'Show others this was sent via Jumble': '告訴別人這是透過 Jumble 發送的',
+    'Show others this was sent via Agnostric': '告訴別人這是透過 Jumble 發送的',
     'Are you sure you want to logout?': '確定要登出嗎？',
     'relay sets': '伺服器組',
     edit: '編輯',

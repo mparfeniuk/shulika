@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useDmSupport, useFetchFollowings, useFetchProfile } from '@/hooks'
 import { toDmConversation, toMuteList, toProfileEditor } from '@/lib/link'
-import { hasUnsupportedFontCharacters } from '@/lib/utils'
+import { formatTextWithFontFallback } from '@/lib/utils'
 import { SecondaryPageLink, useSecondaryPage } from '@/PageManager'
 import { useMuteList } from '@/providers/MuteListProvider'
 import { useNostr } from '@/providers/NostrProvider'
@@ -137,7 +137,8 @@ export default function Profile({ id }: { id?: string }) {
               <TextWithEmojis
                 text={username}
                 emojis={emojis}
-                className={`${hasUnsupportedFontCharacters(username) ? 'font-cormorant font-semibold' : 'agnostric-decor-text'} truncate text-3xl select-text text-amber-50/90`}
+                className='truncate text-3xl select-text text-amber-50/90'
+                useFallbackFont
               />
               <TrustScoreBadge pubkey={pubkey} />
               {isFollowingYou && (

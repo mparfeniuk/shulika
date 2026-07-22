@@ -95,7 +95,7 @@ export default {
     'Add an Account': 'Profil hozzáadása',
     'More options': 'További lehetőségek',
     'Add client tag': 'Kliens jelölése',
-    'Show others this was sent via Jumble': 'Mutasd meg másoknak, hogy Jumble-lel küldted',
+    'Show others this was sent via Agnostric': 'Mutasd meg másoknak, hogy Jumble-lel küldted',
     'Are you sure you want to logout?': 'Biztosan ki akarsz lépni?',
     'relay sets': 'csomópont listák',
     edit: 'szerkesztés',

@@ -96,7 +96,7 @@ export default {
     'Add an Account': 'アカウントを追加',
     'More options': 'その他のオプション',
     'Add client tag': 'クライアントタグを追加',
-    'Show others this was sent via Jumble': 'これがJumble経由で送信されたことを表示',
+    'Show others this was sent via Agnostric': 'これがJumble経由で送信されたことを表示',
     'Are you sure you want to logout?': '本当にログアウトしますか？',
     'relay sets': 'リレイセット',
     edit: '編集',

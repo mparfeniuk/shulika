@@ -1,7 +1,8 @@
-import { EmbeddedEmojiParser, parseContent } from '@/lib/content-parser'
-import { TEmoji } from '@/types'
-import { useMemo } from 'react'
-import Emoji from '../Emoji'
+import { EmbeddedEmojiParser, parseContent } from '@/lib/content-parser';
+import { formatTextWithFontFallback } from '@/lib/utils';
+import { TEmoji } from '@/types';
+import { useMemo } from 'react';
+import Emoji from '../Emoji';
 
 /**
  * Component that renders text with custom emojis replaced by emoji images
@@ -11,12 +12,14 @@ export default function TextWithEmojis({
   text,
   emojis,
   className,
-  emojiClassName
+  emojiClassName,
+  useFallbackFont
 }: {
   text: string
   emojis?: TEmoji[]
   className?: string
   emojiClassName?: string
+  useFallbackFont?: boolean
 }) {
   const nodes = useMemo(() => {
     if (!emojis || emojis.length === 0) {
@@ -40,7 +43,13 @@ export default function TextWithEmojis({
     <span dir="auto" className={className}>
       {nodes.map((node, index) => {
         if (node.type === 'text') {
-          return node.data
+          return useFallbackFont ?
+            formatTextWithFontFallback(
+              node.data,
+              {
+                fontClass: 'agnostric-decor-text',
+                fallbackFontClass: 'font-cormorant font-semibold'
+              }) : node.data
         }
         if (node.type === 'emoji') {
           const shortcode = node.data.split(':')[1]

@@ -96,7 +96,7 @@ export default {
     'Add an Account': 'Добавить аккаунт',
     'More options': 'Больше опций',
     'Add client tag': 'Добавить тег клиента',
-    'Show others this was sent via Jumble':
+    'Show others this was sent via Agnostric':
       'Показать другим, что сообщение отправлено через Jumble',
     'Are you sure you want to logout?': 'Вы уверены, что хотите выйти?',
     'relay sets': 'наборы ретрансляторов',

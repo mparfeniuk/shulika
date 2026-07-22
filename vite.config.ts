@@ -141,7 +141,6 @@ export default defineConfig(({ mode }) => {
         '@': path.resolve(__dirname, './src')
       }
     },
-    // 💡 Додано розбиття коду для оптимізації розміру бандлу:
     build: {
       rollupOptions: {
         output: {
